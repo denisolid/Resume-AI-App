@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Edit2, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import React, { useState } from "react";
+import { Edit2, CheckCircle, AlertCircle, RefreshCw } from "lucide-react";
 
 interface Suggestion {
-  type: 'improvement' | 'warning' | 'success';
+  type: "improvement" | "warning" | "success";
   text: string;
 }
 
@@ -12,17 +12,17 @@ interface ResumeEditorProps {
   analysis?: string;
 }
 
-const ResumeEditor: React.FC<ResumeEditorProps> = ({ 
-  content = '', 
-  suggestions = [], 
-  analysis = '' 
+const ResumeEditor: React.FC<ResumeEditorProps> = ({
+  content = "",
+  suggestions = [],
+  analysis = "",
 }) => {
   const [editedContent, setEditedContent] = useState(content);
 
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
       <h2 className="text-2xl font-semibold mb-4">Resume Editor</h2>
-      
+
       <div className="mb-6">
         <textarea
           className="w-full h-64 p-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
@@ -32,7 +32,7 @@ const ResumeEditor: React.FC<ResumeEditorProps> = ({
         />
       </div>
 
-      {suggestions.length > 0 && (
+      {/* {suggestions.length > 0 && (
         <div className="space-y-4 mb-6">
           <h3 className="text-lg font-medium">AI Suggestions</h3>
           {suggestions.map((suggestion, index) => (
@@ -67,7 +67,7 @@ const ResumeEditor: React.FC<ResumeEditorProps> = ({
             </div>
           ))}
         </div>
-      )}
+      )} */}
 
       {analysis && (
         <div className="mt-6">
@@ -86,9 +86,7 @@ const ResumeEditor: React.FC<ResumeEditorProps> = ({
           <RefreshCw className="h-4 w-4" />
           <span>Reset Changes</span>
         </button>
-        <button
-          className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-        >
+        <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
           Save Changes
         </button>
       </div>

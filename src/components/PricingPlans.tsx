@@ -1,49 +1,49 @@
-import React from 'react';
-import { Check, Crown } from 'lucide-react';
+import React from "react";
+import { Check, Crown } from "lucide-react";
 
 const PricingPlans = () => {
   const plans = [
     {
-      name: 'Free',
-      price: '$0',
-      period: 'forever',
+      name: "Free",
+      price: "$0",
+      period: "forever",
       features: [
-        'Basic resume analysis',
-        'Limited suggestions',
-        'Basic templates',
-        '1 cover letter per month',
+        "Basic resume analysis",
+        "Limited suggestions",
+        "Basic templates",
+        "1 cover letter per month",
       ],
-      buttonText: 'Get Started',
+      buttonText: "Get Started",
       highlighted: false,
     },
     {
-      name: 'Pro',
-      price: '$12',
-      period: 'per month',
+      name: "Pro (coming soon)",
+      price: "$12",
+      period: "per month",
       features: [
-        'Advanced AI analysis',
-        'Unlimited suggestions',
-        'Premium templates',
-        'Unlimited cover letters',
-        'Priority support',
-        'Industry-specific keywords',
+        "Advanced AI analysis",
+        "Unlimited suggestions",
+        "Premium templates",
+        "Unlimited cover letters",
+        "Priority support",
+        "Industry-specific keywords",
       ],
-      buttonText: 'Start Pro Trial',
+      buttonText: "Start Pro Trial",
       highlighted: true,
     },
     {
-      name: 'Enterprise',
-      price: '$49',
-      period: 'per month',
+      name: "Enterprise (coming soon)",
+      price: "$49",
+      period: "per month",
       features: [
-        'Everything in Pro',
-        'Custom templates',
-        'API access',
-        'Dedicated support',
-        'Team collaboration',
-        'Analytics dashboard',
+        "Everything in Pro",
+        "Custom templates",
+        "API access",
+        "Dedicated support",
+        "Team collaboration",
+        "Analytics dashboard",
       ],
-      buttonText: 'Contact Sales',
+      buttonText: "Contact Sales",
       highlighted: false,
     },
   ];
@@ -57,8 +57,8 @@ const PricingPlans = () => {
             key={plan.name}
             className={`rounded-xl p-8 ${
               plan.highlighted
-                ? 'bg-indigo-600 text-white transform scale-105'
-                : 'bg-white'
+                ? "bg-indigo-600 text-white transform scale-105"
+                : "bg-white"
             } shadow-xl`}
           >
             <div className="text-center">
@@ -70,8 +70,8 @@ const PricingPlans = () => {
               <button
                 className={`w-full py-2 px-4 rounded-lg transition ${
                   plan.highlighted
-                    ? 'bg-white text-indigo-600 hover:bg-gray-100'
-                    : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                    ? "bg-white text-indigo-600 hover:bg-gray-100"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700"
                 }`}
               >
                 {plan.buttonText}
