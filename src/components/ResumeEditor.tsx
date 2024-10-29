@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Edit2, CheckCircle, AlertCircle, RefreshCw } from "lucide-react";
 
 interface Suggestion {
@@ -19,6 +19,10 @@ const ResumeEditor: React.FC<ResumeEditorProps> = ({
 }) => {
   const [editedContent, setEditedContent] = useState(content);
 
+  useEffect(() => {
+    setEditedContent(content);
+  }, [content]);
+
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
       <h2 className="text-2xl font-semibold mb-4">Resume Editor</h2>
@@ -32,42 +36,42 @@ const ResumeEditor: React.FC<ResumeEditorProps> = ({
         />
       </div>
 
-      {/* {suggestions.length > 0 && (
+      {suggestions.length > 0 && (
         <div className="space-y-4 mb-6">
           <h3 className="text-lg font-medium">AI Suggestions</h3>
           {suggestions.map((suggestion, index) => (
             <div
               key={index}
               className={`p-4 rounded-lg flex items-start space-x-3 ${
-                suggestion.type === 'improvement'
-                  ? 'bg-blue-50'
-                  : suggestion.type === 'warning'
-                  ? 'bg-yellow-50'
-                  : 'bg-green-50'
+                suggestion.type === "improvement"
+                  ? "bg-blue-50"
+                  : suggestion.type === "warning"
+                  ? "bg-yellow-50"
+                  : "bg-green-50"
               }`}
             >
-              {suggestion.type === 'improvement' ? (
+              {suggestion.type === "improvement" ? (
                 <Edit2 className="h-5 w-5 text-blue-600" />
-              ) : suggestion.type === 'warning' ? (
+              ) : suggestion.type === "warning" ? (
                 <AlertCircle className="h-5 w-5 text-yellow-600" />
               ) : (
                 <CheckCircle className="h-5 w-5 text-green-600" />
               )}
               <p
-                className={
-                  suggestion.type === 'improvement'
-                    ? 'text-blue-700'
-                    : suggestion.type === 'warning'
-                    ? 'text-yellow-700'
-                    : 'text-green-700'
-                }
+                className={`${
+                  suggestion.type === "improvement"
+                    ? "text-blue-700"
+                    : suggestion.type === "warning"
+                    ? "text-yellow-700"
+                    : "text-green-700"
+                }`}
               >
                 {suggestion.text}
               </p>
             </div>
           ))}
         </div>
-      )} */}
+      )}
 
       {analysis && (
         <div className="mt-6">

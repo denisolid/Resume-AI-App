@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { FileText, Upload, FileCheck, Send, Crown } from 'lucide-react';
-import { useAuth } from './components/AuthContext';
-import AuthModal from './components/AuthModal';
-import ResumeUploader from './components/ResumeUploader';
-import ResumeEditor from './components/ResumeEditor';
-import CoverLetterGenerator from './components/CoverLetterGenerator';
-import PricingPlans from './components/PricingPlans';
+import React, { useState } from "react";
+import { FileText, Upload, FileCheck, Send, Crown } from "lucide-react";
+import { useAuth } from "./components/AuthContext";
+import AuthModal from "./components/AuthModal";
+import ResumeUploader from "./components/ResumeUploader";
+import ResumeEditor from "./components/ResumeEditor";
+import CoverLetterGenerator from "./components/CoverLetterGenerator";
+import PricingPlans from "./components/PricingPlans";
 
 interface AnalysisResult {
   suggestions: Array<{
-    type: 'improvement' | 'warning' | 'success';
+    type: "improvement" | "warning" | "success";
     text: string;
   }>;
   parsedContent: string;
@@ -19,7 +19,9 @@ interface AnalysisResult {
 function App() {
   const { user, logout } = useAuth();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(
+    null
+  );
 
   const handleAnalysisComplete = (result: AnalysisResult) => {
     setAnalysisResult(result);
@@ -72,16 +74,16 @@ function App() {
             Transform Your Resume with AI
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Upload your resume and let our AI optimize it for your dream job. Get instant feedback,
-            suggestions, and tailored cover letters.
+            Upload your resume and let our AI optimize it for your dream job.
+            Get instant feedback, suggestions, and tailored cover letters.
           </p>
         </div>
 
         {user ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div className="flex flex-col gap-8 mb-16">
               <ResumeUploader onAnalysisComplete={handleAnalysisComplete} />
-              <ResumeEditor 
+              <ResumeEditor
                 content={analysisResult?.parsedContent}
                 suggestions={analysisResult?.suggestions}
                 analysis={analysisResult?.analysis}
@@ -109,7 +111,8 @@ function App() {
             <div>
               <h3 className="text-lg font-semibold mb-4">ResumeAI</h3>
               <p className="text-gray-400">
-                Empowering job seekers with AI-powered resume optimization and cover letter generation.
+                Empowering job seekers with AI-powered resume optimization and
+                cover letter generation.
               </p>
             </div>
             <div>
@@ -124,7 +127,8 @@ function App() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Contact</h3>
               <p className="text-gray-400">
-                support@resumeai.com<br />
+                support@resumeai.com
+                <br />
                 1-800-RESUME-AI
               </p>
             </div>
@@ -132,7 +136,10 @@ function App() {
         </div>
       </footer>
 
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </div>
   );
 }

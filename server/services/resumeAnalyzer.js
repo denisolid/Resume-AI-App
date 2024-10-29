@@ -45,24 +45,58 @@ export async function analyzeResume(filePath, fileType) {
         {
           role: "system",
           content:
-            "You are an expert resume analyzer. Analyze the resume structure and content, providing specific improvements.",
+            "You are an expert resume analyzer. Analyze the resume structure and content. Necessarily provide the word 'improvement', 'warning' or 'success' for each point of analysis",
         },
         {
           role: "user",
-          content: `Analyze this resume and provide structured feedback:\n\n${content}, in the end provide 1-10 scale mark in bold, according to your analysis. Сalculate the probability in percentage that person will be hired in bold`,
+          content: `Analyze this resume and provide structured feedback:\n\n${content}. At the end of each comment, classify it into one of three categories (improvement, warning, success).`,
         },
       ],
       temperature: 0.7,
       max_tokens: 1000,
     });
 
+    // Initial data analysis for content
+    const dataAnalysis = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an expert resume analyzer and very professional HR. Analyze the resume content.",
+        },
+        {
+          role: "user",
+          content: `Analyze this resume and provide structured feedback:\n\n${content}.  1) Calculate the probability in percentage that person will be hired in bold. 2)Keyword Identification: Identify keywords that match the job posting and industry, and identify which words should be added or improved.
+3) ATS Optimization: Tips to improve your resume for Applicant Tracking Systems (ATS) to increase your chances of getting through.4)Recommendations for training and development. 5)Provide 1-10 scale mark in bold, according to your resume analysis.`,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 300,
+    });
+    const analysisText = structureAnalysis.choices[0].message.content;
+
     // Generate suggestions
-    const suggestions = [
-      {
-        type: "improvement",
-        text: structureAnalysis.choices[0].message.content,
-      },
-    ];
+    const suggestions = [];
+    const lines = analysisText.split("\n");
+    for (const line of lines) {
+      if (line.toLowerCase().includes("improve")) {
+        suggestions.push({
+          type: "improvement",
+          text: line,
+        });
+      } else if (line.toLowerCase().includes("warning")) {
+        suggestions.push({
+          type: "warning",
+          text: line,
+        });
+      } else if (line.toLowerCase().includes("success")) {
+        suggestions.push({
+          type: "success",
+          text: line,
+        });
+      }
+    }
 
     // Clean up the file after analysis
     try {
@@ -74,7 +108,7 @@ export async function analyzeResume(filePath, fileType) {
     return {
       suggestions,
       parsedContent: content,
-      analysis: structureAnalysis.choices[0].message.content,
+      analysis: dataAnalysis.choices[0].message.content,
     };
   } catch (error) {
     console.error("Resume analysis error:", error);
